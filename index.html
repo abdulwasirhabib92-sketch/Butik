@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,9 +7,10 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
     font-family:'Segoe UI',sans-serif;
-    background:#0f0f0f;
+    background:#0b0c10;
     color:white;
 }
 
@@ -17,16 +18,17 @@ body{
 .container{
     max-width:400px;
     margin:80px auto;
-    background:#fff;
+    background:white;
     color:#333;
     padding:30px;
-    border-radius:12px;
+    border-radius:15px;
 }
 
-input, button{
+input,button{
     width:100%;
     padding:12px;
     margin:10px 0;
+    border-radius:8px;
 }
 
 button{
@@ -36,65 +38,88 @@ button{
     cursor:pointer;
 }
 
-.switch{
-    text-align:center;
+/* NAV */
+nav{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 20px;
+    background:#000;
+}
+
+.logout{
     color:#ff2e63;
     cursor:pointer;
 }
 
-/* DASHBOARD */
-#dashboard{display:none;}
-
-nav{
-    background:#000;
-    padding:15px;
+/* HERO */
+.hero{
+    height:60vh;
+    background:url("https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?auto=format&fit=crop&w=1400&q=80") center/cover;
     display:flex;
-    justify-content:space-between;
-}
-
-.logout{cursor:pointer;color:#ff2e63;}
-
-/* VIDEO SHOP */
-.feed{
-    height:100vh;
-    overflow-y:scroll;
-    scroll-snap-type:y mandatory;
-}
-
-.product{
-    height:100vh;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
     position:relative;
-    scroll-snap-align:start;
 }
 
-.product video{
+.hero::after{
+    content:"";
+    position:absolute;
     width:100%;
     height:100%;
+    background:rgba(0,0,0,0.5);
+}
+
+.hero h1{
+    font-size:3rem;
+    z-index:1;
+}
+
+/* WELCOME */
+#welcomeBox{
+    padding:20px;
+    text-align:center;
+}
+
+/* PRODUCTS */
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border-radius:15px;
+    overflow:hidden;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:220px;
     object-fit:cover;
 }
 
-/* OVERLAY CONTENT */
-.overlay{
-    position:absolute;
-    bottom:20px;
-    left:20px;
-}
-
-.overlay h2{
-    font-size:24px;
-}
-
-.overlay p{
-    margin:5px 0;
+.card-content{
+    padding:15px;
 }
 
 .order-btn{
     background:#25D366;
-    padding:10px 15px;
     border:none;
-    border-radius:8px;
+    padding:10px;
+    width:100%;
     color:white;
+    margin-top:10px;
     cursor:pointer;
+    border-radius:8px;
 }
 </style>
 </head>
@@ -110,101 +135,83 @@ nav{
 
     <button onclick="handleAuth()">Login</button>
 
-    <div class="switch" onclick="toggleForm()">
+    <p style="text-align:center;cursor:pointer;color:#ff2e63;" onclick="toggleForm()">
         Don't have an account? Sign up
-    </div>
+    </p>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboard">
+<div id="dashboard" style="display:none;">
 
-    <nav>
-        <div>MIMEES COLLECTION</div>
-        <div>
-            <span id="userDisplay"></span> |
-            <span class="logout" onclick="logout()">Logout</span>
-        </div>
-    </nav>
-
-    <div id="welcomeBox" style="padding:15px;"></div>
-
-    <!-- TIKTOK STYLE SHOP -->
-    <div class="feed">
-
-        <!-- PRODUCT 1 -->
-        <div class="product">
-            <video src="videos/dress.mp4" autoplay muted loop playsinline></video>
-            <div class="overlay">
-                <h2>👗 Ladies Dress</h2>
-                <p>Trendy & elegant</p>
-                <button class="order-btn" onclick="order('Ladies Dress')">
-                    Order on WhatsApp
-                </button>
-            </div>
-        </div>
-
-        <!-- PRODUCT 2 -->
-        <div class="product">
-            <video src="videos/sneakers.mp4" autoplay muted loop playsinline></video>
-            <div class="overlay">
-                <h2>👟 Sneakers</h2>
-                <p>Comfort & style</p>
-                <button class="order-btn" onclick="order('Sneakers')">
-                    Order on WhatsApp
-                </button>
-            </div>
-        </div>
-
-        <!-- PRODUCT 3 -->
-        <div class="product">
-            <video src="videos/heels.mp4" autoplay muted loop playsinline></video>
-            <div class="overlay">
-                <h2>👠 Heels</h2>
-                <p>Elegant vibes</p>
-                <button class="order-btn" onclick="order('Heels')">
-                    Order on WhatsApp
-                </button>
-            </div>
-        </div>
-
-        <!-- PRODUCT 4 -->
-        <div class="product">
-            <video src="videos/men.mp4" autoplay muted loop playsinline></video>
-            <div class="overlay">
-                <h2>👕 Men's Outfit</h2>
-                <p>Clean modern look</p>
-                <button class="order-btn" onclick="order('Mens Outfit')">
-                    Order on WhatsApp
-                </button>
-            </div>
-        </div>
-
+<nav>
+    <div>MIMEES COLLECTION</div>
+    <div>
+        <span id="userDisplay"></span> |
+        <span class="logout" onclick="logout()">Logout</span>
     </div>
+</nav>
+
+<div id="welcomeBox"></div>
+
+<div class="hero">
+    <h1>Style That Defines You ✨</h1>
+</div>
+
+<div class="products">
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&q=80">
+        <div class="card-content">
+            <h3>👗 Ladies Fashion</h3>
+            <p>Elegant & modern outfits</p>
+            <button class="order-btn" onclick="order('Ladies Fashion')">Order on WhatsApp</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1520975682031-ae4c5d6f9d3b?auto=format&fit=crop&w=800&q=80">
+        <div class="card-content">
+            <h3>👕 Men's Wear</h3>
+            <p>Clean and classy styles</p>
+            <button class="order-btn" onclick="order('Mens Wear')">Order on WhatsApp</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=800&q=80">
+        <div class="card-content">
+            <h3>👟 Sneakers</h3>
+            <p>Street fashion & comfort</p>
+            <button class="order-btn" onclick="order('Sneakers')">Order on WhatsApp</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80">
+        <div class="card-content">
+            <h3>👠 Luxury Shoes</h3>
+            <p>Premium collection</p>
+            <button class="order-btn" onclick="order('Luxury Shoes')">Order on WhatsApp</button>
+        </div>
+    </div>
+
+</div>
 
 </div>
 
 <script>
 let isLogin = true;
 
-// SWITCH FORM
+// TOGGLE
 function toggleForm(){
     isLogin = !isLogin;
     document.getElementById("formTitle").innerText = isLogin ? "Login" : "Sign Up";
-    document.querySelector("button").innerText = isLogin ? "Login" : "Sign Up";
-    document.querySelector(".switch").innerText = isLogin 
-        ? "Don't have an account? Sign up"
-        : "Already have an account? Login";
 }
 
-// AUTH SYSTEM
+// AUTH
 function handleAuth(){
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
-
-    if(!username || !password){
-        alert("Fill all fields");
-        return;
-    }
 
     let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -216,51 +223,38 @@ function handleAuth(){
             alert("Invalid login");
         }
     } else {
-        if(users[username]){
-            alert("User exists");
-            return;
-        }
-
-        users[username] = {
-            password: password,
-            firstLogin: true
-        };
-
+        users[username] = {password, firstLogin:true};
         localStorage.setItem("users", JSON.stringify(users));
-        alert("Signup successful! Login now.");
+        alert("Account created! Now login.");
         toggleForm();
     }
 }
 
-// LOAD DASHBOARD
+// DASHBOARD
 function loadDashboard(){
-    let username = localStorage.getItem("currentUser");
+    let user = localStorage.getItem("currentUser");
     let users = JSON.parse(localStorage.getItem("users"));
 
-    document.getElementById("authBox").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
-    document.getElementById("userDisplay").innerText = username;
+    document.getElementById("authBox").style.display="none";
+    document.getElementById("dashboard").style.display="block";
+    document.getElementById("userDisplay").innerText=user;
 
-    let welcomeBox = document.getElementById("welcomeBox");
+    let box=document.getElementById("welcomeBox");
 
-    if(users[username].firstLogin){
-        welcomeBox.innerHTML = `
-            <h3>🎉 Welcome ${username}!</h3>
-            <p>Welcome to MIMEES COLLECTION — your fashion plug 🔥</p>
-        `;
-        users[username].firstLogin = false;
-        localStorage.setItem("users", JSON.stringify(users));
-    } else {
-        welcomeBox.innerHTML = `<h3>Welcome back ${username} 👋</h3>`;
+    if(users[user].firstLogin){
+        box.innerHTML=`<h2>🎉 Welcome ${user} to MIMEES COLLECTION</h2><p>Your fashion journey starts here ✨</p>`;
+        users[user].firstLogin=false;
+        localStorage.setItem("users",JSON.stringify(users));
+    }else{
+        box.innerHTML=`<h2>Welcome back ${user} 👋</h2>`;
     }
 }
 
 // WHATSAPP ORDER
-function order(product){
-    let phone = "233591808780";
-    let message = `Hello, I want to order: ${product} from MIMEES COLLECTION`;
-    let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
+function order(item){
+    let phone="233591808780";
+    let msg=`Hello, I want to order: ${item} from MIMEES COLLECTION`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank");
 }
 
 // LOGOUT
@@ -270,9 +264,8 @@ function logout(){
 }
 
 // AUTO LOGIN
-window.onload = function(){
-    let user = localStorage.getItem("currentUser");
-    if(user){
+window.onload=()=>{
+    if(localStorage.getItem("currentUser")){
         loadDashboard();
     }
 }
