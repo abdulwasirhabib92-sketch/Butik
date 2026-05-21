@@ -6,65 +6,11 @@
 <title>MIMEES COLLECTION</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
-    font-family:'Segoe UI',sans-serif;
-    background: linear-gradient(135deg,#0b3d2e,#1f7a4a,#f2c94c);
-    color:white;
-    overflow-x:hidden;
-}
-
-/* RUNWAY INTRO */
-#intro{
-    position:fixed;
-    width:100%;
-    height:100vh;
-    background:black;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-    animation:fadeOut 2s ease 3s forwards;
-}
-
-#intro h1{
-    font-size:2.5rem;
-    letter-spacing:10px;
-    animation:zoom 2s ease;
-}
-
-@keyframes zoom{
-    0%{transform:scale(0.5);opacity:0;}
-    100%{transform:scale(1);opacity:1;}
-}
-
-@keyframes fadeOut{
-    to{opacity:0;visibility:hidden;}
-}
-
-/* LOGIN */
-.container{
-    max-width:400px;
-    margin:80px auto;
-    background:white;
-    color:#333;
-    padding:25px;
-    border-radius:15px;
-}
-
-input,button{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border-radius:8px;
-}
-
-button{
-    background:linear-gradient(135deg,#1f7a4a,#f2c94c);
-    border:none;
-    font-weight:bold;
-    cursor:pointer;
+    background: linear-gradient(135deg,#ffffff,#eafff3,#1f7a4a,#f2c94c);
+    color:#111;
 }
 
 /* NAV */
@@ -72,33 +18,50 @@ button{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:18px;
-    background:rgba(0,0,0,0.7);
-    backdrop-filter:blur(10px);
+    padding:15px 20px;
+    background:white;
+    border-bottom:3px solid #f2c94c;
 }
 
 .logo{
     font-weight:900;
-    letter-spacing:6px;
+    letter-spacing:5px;
 }
 
-.logo span{
-    color:#f2c94c;
+.logo span{color:#1f7a4a;}
+
+/* LOGIN */
+.container{
+    max-width:400px;
+    margin:80px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
 
-.logout{
-    color:#f2c94c;
+input,button{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+}
+
+button{
+    background:linear-gradient(135deg,#1f7a4a,#f2c94c);
+    border:none;
+    color:#111;
+    font-weight:bold;
     cursor:pointer;
 }
 
 /* HERO */
 .hero{
-    height:60vh;
+    height:55vh;
     background:url("https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?auto=format&fit=crop&w=1400&q=80") center/cover;
     display:flex;
-    justify-content:center;
     align-items:center;
-    text-align:center;
+    justify-content:center;
+    color:white;
     position:relative;
 }
 
@@ -107,11 +70,11 @@ button{
     position:absolute;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.5);
+    background:rgba(0,0,0,0.4);
 }
 
 .hero h1{
-    font-size:3rem;
+    font-size:2.5rem;
     z-index:1;
 }
 
@@ -120,32 +83,29 @@ button{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
-    padding:25px;
+    padding:20px;
 }
 
 .card{
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(242,201,76,0.3);
+    background:white;
     border-radius:15px;
     overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
     transition:0.3s;
 }
 
-.card:hover{
-    transform:translateY(-10px);
-}
+.card:hover{transform:translateY(-8px);}
 
 .card img{
     width:100%;
     height:220px;
     object-fit:cover;
+    transition:0.5s;
 }
 
-.card-content{
-    padding:15px;
-}
+.card-content{padding:15px;}
 
-.add-btn{
+.btn{
     width:100%;
     padding:10px;
     margin-top:10px;
@@ -156,59 +116,50 @@ button{
 }
 
 /* CART */
-#cartBox{
+#cart{
     position:fixed;
-    right:20px;
-    bottom:20px;
-    background:black;
+    right:15px;
+    bottom:15px;
+    background:white;
     padding:15px;
     border-radius:10px;
-    max-width:250px;
+    width:220px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
-.cart-item{
-    font-size:14px;
+.item{
+    font-size:13px;
     margin:5px 0;
 }
 
 .checkout{
     background:#25D366;
+    color:white;
     padding:10px;
     border:none;
     width:100%;
     margin-top:10px;
-    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<!-- RUNWAY INTRO -->
-<div id="intro">
-    <h1>MIMEES COLLECTION</h1>
-</div>
-
 <!-- LOGIN -->
-<div class="container" id="authBox">
-    <h2>Login</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
+<div class="container" id="loginBox">
+    <h2>MIMEES COLLECTION</h2>
+    <input type="text" id="user" placeholder="Username">
+    <input type="password" id="pass" placeholder="Password">
     <button onclick="login()">Enter Store</button>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboard" style="display:none;">
+<div id="app" style="display:none;">
 
 <div class="navbar">
     <div class="logo">M I M E E S <span>COLLECTION</span></div>
-    <div>
-        <span id="userDisplay"></span> |
-        <span class="logout" onclick="logout()">Logout</span>
-    </div>
+    <div id="userDisplay"></div>
 </div>
-
-<div id="welcomeBox" style="padding:15px;text-align:center;"></div>
 
 <div class="hero">
     <h1>Luxury Fashion Redefined ✨</h1>
@@ -217,110 +168,123 @@ button{
 <div class="products">
 
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1520975682031-ae4c5d6f9d3b?auto=format&fit=crop&w=800&q=80">
+        <img id="menImg">
         <div class="card-content">
-            <h3>Men’s Fashion</h3>
-            <button class="add-btn" onclick="add('Men Fashion')">Add to Cart</button>
+            <h3>Men Fashion</h3>
+            <button class="btn" onclick="add('Men Fashion')">Add to Cart</button>
         </div>
     </div>
 
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&q=80">
+        <img id="womenImg">
         <div class="card-content">
-            <h3>Ladies Wear</h3>
-            <button class="add-btn" onclick="add('Ladies Wear')">Add to Cart</button>
+            <h3>Women Fashion</h3>
+            <button class="btn" onclick="add('Women Fashion')">Add to Cart</button>
         </div>
     </div>
 
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=800&q=80">
+        <img id="shoeImg">
         <div class="card-content">
             <h3>Sneakers</h3>
-            <button class="add-btn" onclick="add('Sneakers')">Add to Cart</button>
+            <button class="btn" onclick="add('Sneakers')">Add to Cart</button>
         </div>
     </div>
 
 </div>
 
 <!-- CART -->
-<div id="cartBox">
+<div id="cart">
     <h3>🛒 Cart</h3>
-    <div id="cartItems"></div>
-    <button class="checkout" onclick="checkout()">Checkout on WhatsApp</button>
+    <div id="items"></div>
+    <button class="checkout" onclick="checkout()">Checkout WhatsApp</button>
 </div>
 
 </div>
 
 <script>
 
-let cart = [];
+let cart=[];
 
 // LOGIN
 function login(){
-    let u=document.getElementById("username").value;
-    if(!u)return alert("Enter username");
+    let u=document.getElementById("user").value;
+    if(!u)return;
 
     localStorage.setItem("user",u);
     load();
 }
 
-// LOAD
+// LOAD APP
 function load(){
+    document.getElementById("loginBox").style.display="none";
+    document.getElementById("app").style.display="block";
+
     let u=localStorage.getItem("user");
-
-    document.getElementById("authBox").style.display="none";
-    document.getElementById("dashboard").style.display="block";
-    document.getElementById("userDisplay").innerText=u;
-
-    let users=JSON.parse(localStorage.getItem("users")||"{}");
-
-    if(!users[u]){
-        users[u]={first:true};
-        localStorage.setItem("users",JSON.stringify(users));
-    }
-
-    let box=document.getElementById("welcomeBox");
-
-    if(users[u].first){
-        box.innerHTML=`<h2>🎉 Welcome ${u} to MIMEES COLLECTION</h2>`;
-        users[u].first=false;
-        localStorage.setItem("users",JSON.stringify(users));
-    }
+    document.getElementById("userDisplay").innerText="Hi, "+u;
 }
 
 // CART
 function add(item){
     cart.push(item);
-    renderCart();
+    render();
 }
 
-function renderCart(){
-    let box=document.getElementById("cartItems");
+function render(){
+    let box=document.getElementById("items");
     box.innerHTML="";
-    cart.forEach((c,i)=>{
-        box.innerHTML+=`<div class="cart-item">${c}</div>`;
+    cart.forEach(i=>{
+        box.innerHTML+=`<div class="item">${i}</div>`;
     });
 }
 
 // CHECKOUT
 function checkout(){
     let phone="233591808780";
-    let msg="Hello, I want to order: "+cart.join(", ");
+    let msg="Order: "+cart.join(", ");
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
 }
 
-// LOGOUT
-function logout(){
-    localStorage.removeItem("user");
-    location.reload();
+// IMAGE SLIDER (REAL INTERNET FASHION IMAGES)
+const men=[
+"https://images.unsplash.com/photo-1520975682031-ae4c5d6f9d3b",
+"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c",
+"https://images.unsplash.com/photo-1516257984-b1b4d707412e"
+];
+
+const women=[
+"https://images.unsplash.com/photo-1520975916090-3105956dac38",
+"https://images.unsplash.com/photo-1496747611176-843222e1e57c",
+"https://images.unsplash.com/photo-1483985988355-763728e1935b"
+];
+
+const shoes=[
+"https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb",
+"https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+"https://images.unsplash.com/photo-1528701800489-20be3c1c4c1e"
+];
+
+let i=0;
+
+function rotate(){
+    i=(i+1)%men.length;
+
+    document.getElementById("menImg").src=men[i];
+    document.getElementById("womenImg").src=women[i];
+    document.getElementById("shoeImg").src=shoes[i];
 }
 
-// AUTO LOAD
+setInterval(rotate,4000);
+
+// AUTO LOGIN
 window.onload=()=>{
-    if(localStorage.getItem("user")){
-        load();
-    }
+    if(localStorage.getItem("user")) load();
+
+    document.getElementById("menImg").src=men[0];
+    document.getElementById("womenImg").src=women[0];
+    document.getElementById("shoeImg").src=shoes[0];
 }
+
 </script>
 
 </body>
